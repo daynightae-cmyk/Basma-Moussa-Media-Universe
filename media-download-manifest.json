@@ -1,0 +1,62 @@
+﻿[
+    {
+        "key":  "logo",
+        "filename":  "2766240fc_basma-logo-master.png",
+        "size":  867137,
+        "sha256":  "29CFEBFDADA85F3D6663D9FCB312BD0981F4EAA5782058BBC74088A890168020"
+    },
+    {
+        "key":  "icon",
+        "filename":  "561d12f1b_basma-icon-circle.png",
+        "size":  310895,
+        "sha256":  "1BBE77A36F0BBB33AB115711D2C4F5BE2F11EACB6DC9826C0DBC6483236CCA37"
+    },
+    {
+        "key":  "mediaUniverse",
+        "filename":  "4dbb73f07_03-media-universe.webp",
+        "size":  122308,
+        "sha256":  "216F3BD88942E32C5AAB546B51A6E1CB3B1F10E321292916052D4B92443E6FA9"
+    },
+    {
+        "key":  "studio",
+        "filename":  "2fdaaab5b_04-interview-studio.webp",
+        "size":  170876,
+        "sha256":  "9141C4C4E7C75C7868B4DEC67EB11BFF30C7F344232906C2CD67FC0C045EA9A7"
+    },
+    {
+        "key":  "legalLens",
+        "filename":  "66eea2c30_06-legal-lens.webp",
+        "size":  114432,
+        "sha256":  "7207674AD1B9AEB5E1CDC41B2F63C42441CBB60A62FD84B1168FBEDAEC150B3E"
+    },
+    {
+        "key":  "cityVoices",
+        "filename":  "813dc338c_07-city-voices.webp",
+        "size":  85596,
+        "sha256":  "4911CCF5AE32944B0BC620E91D6D57B8402993E88622700D24069F3B0B743E85"
+    },
+    {
+        "key":  "frequency",
+        "filename":  "68dbb2dc4_08-voice-identity.webp",
+        "size":  82452,
+        "sha256":  "AEBA1AE9E85FF08282D4B05A03F3EC2F685102891F91819E977358E00D20BDB3"
+    },
+    {
+        "key":  "contact",
+        "filename":  "0f4fc16e2_10-contact-collaboration.webp",
+        "size":  58464,
+        "sha256":  "0B172DFADAB31C66F563E0CFC80E702435517F00C605039B757A83DEE0F7510F"
+    },
+    {
+        "key":  "archive",
+        "filename":  "6169bb0b8_11-documentary-archive.webp",
+        "size":  146792,
+        "sha256":  "F72A5E8003D4FC8370928FBF5AEB0D79AB377AD1A1F2529F426B92C0384A75BF"
+    },
+    {
+        "key":  "legalResearch",
+        "filename":  "c9195d174_legal-research-detail.webp",
+        "size":  71864,
+        "sha256":  "43FF7E19E5919FF72EEFF3C2B026E039BEAE6696CD427A946CF3A22365FB60F7"
+    }
+]

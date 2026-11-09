@@ -27,14 +27,14 @@ function About() {
             <div className="relative overflow-hidden arch">
               <Image
                 src={ASSETS.legalPortrait}
-                alt={t({ ar: "بورتريه توضيحي للهوية البصرية", en: "Illustrative identity portrait" })}
+                alt={t({ ar: "تصميم فني تجريدي مؤقت بدون صورة شخصية", en: "Temporary abstract artwork — no personal photograph" })}
                 fittingType="fill"
                 className="aspect-[3/4] w-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-transparent to-transparent" />
             </div>
             <p className="mt-4 text-[0.6rem] leading-relaxed text-ivory/35">
-              {t({ ar: "صورة توضيحية معتمدة للهوية البصرية — ليست توثيقًا لحدث حقيقي.", en: "Approved illustrative identity image — not documentation of a real event." })}
+              {t({ ar: "تصميم بصري مؤقت إلى حين اعتماد الصور الرسمية لبسمة، وليس صورة حقيقية لها.", en: "Temporary concept artwork until Basma approves official photos. This is not her photograph." })}
             </p>
           </div>
 
