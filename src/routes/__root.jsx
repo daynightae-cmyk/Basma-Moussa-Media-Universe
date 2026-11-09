@@ -3,7 +3,7 @@ import { DefaultCatchBoundary } from "@/components/DefaultCatchBoundary";
 import { NotFound } from "@/components/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/AuthContext";
-import { I18nProvider } from "@/lib/experience/i18n";
+import { I18nProvider, useI18n } from "@/lib/experience/i18n";
 import { Base44Scripts } from "base44:document";
 import appCss from "@/index.css?url";
 
@@ -41,19 +41,28 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <AuthProvider>
-      <I18nProvider>
-        <Outlet />
-        <Toaster />
-      </I18nProvider>
+      <Outlet />
+      <Toaster />
     </AuthProvider>
   );
 }
 
 // The document. There is no index.html: the server renders <html> from here.
+// I18nProvider wraps the whole document so lang/dir are React-controlled and
+// always match the rendered language, on the server and after hydration.
 function RootDocument({ children }) {
   return (
+    <I18nProvider>
+      <DocumentShell>{children}</DocumentShell>
+    </I18nProvider>
+  );
+}
+
+function DocumentShell({ children }) {
+  const { lang, dir } = useI18n();
+  return (
     // The pre-hydration intro script intentionally adds data-intro-seen to <html>.
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html lang={lang} dir={dir} suppressHydrationWarning>
       <head>
         <HeadContent />
         {/* Before the first paint: a returning visitor never sees the intro flash. */}

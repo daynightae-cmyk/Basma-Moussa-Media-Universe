@@ -41,7 +41,7 @@ export default function AiChat({ variant = "page", onClose }) {
             lang,
           },
         });
-        setMessages((prev) => [...prev, { role: "assistant", content: result.reply }]);
+        setMessages([...history, { role: "assistant", content: result.reply }]);
       } catch {
         setError(t({ ar: "تعذّر الوصول للمساعد الآن. جرّب مرة أخرى.", en: "The assistant is unreachable right now. Please try again." }));
       } finally {
@@ -50,6 +50,27 @@ export default function AiChat({ variant = "page", onClose }) {
     },
     [ask, busy, lang, messages, t]
   );
+
+  // A retry re-runs the conversation that is already on screen. Calling send()
+  // again would append the visitor's message a second time.
+  const retry = useCallback(async () => {
+    if (busy || messages.length === 0) return;
+    setError(null);
+    setBusy(true);
+    try {
+      const result = await ask({
+        data: {
+          messages: messages.map((m) => ({ role: m.role, content: m.content })),
+          lang,
+        },
+      });
+      setMessages([...messages, { role: "assistant", content: result.reply }]);
+    } catch {
+      setError(t({ ar: "تعذّر الوصول للمساعد الآن. جرّب مرة أخرى.", en: "The assistant is unreachable right now. Please try again." }));
+    } finally {
+      setBusy(false);
+    }
+  }, [ask, busy, lang, messages, t]);
 
   const reset = () => {
     setMessages([{ role: "assistant", content: greeting(lang) }]);
@@ -134,10 +155,7 @@ export default function AiChat({ variant = "page", onClose }) {
             {error}
             <button
               type="button"
-              onClick={() => {
-                const lastUser = [...messages].reverse().find((m) => m.role === "user");
-                if (lastUser) send(lastUser.content);
-              }}
+              onClick={() => void retry()}
               className="ms-2 text-gold underline-offset-2 hover:underline"
             >
               {t({ ar: "أعد المحاولة", en: "Retry" })}

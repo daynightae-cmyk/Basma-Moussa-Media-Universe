@@ -15,20 +15,38 @@ What you know about the platform:
 
 Style: warm, precise, brief (2-4 short sentences unless asked to go deeper). Answer in the language the user writes in (Arabic or English). Never invent facts, dates, credentials, episode titles or numbers. When you point somewhere on the platform, name the page (Media Universe, Studio, Soundroom, Legal Lens, Stories, About, Contact, Basma AI). Add a short caveat when the topic is legal or still a concept.`;
 
+const LLM_TIMEOUT_MS = 30000;
+
+function withTimeout(promise, ms) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error("assistant-timeout")), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
 export const askBasma = createServerFn({ method: "POST" })
   .validator(
-    z.object({
-      messages: z
-        .array(
-          z.object({
-            role: z.enum(["user", "assistant"]),
-            content: z.string().max(4000),
-          })
-        )
-        .min(1)
-        .max(20),
-      lang: z.enum(["ar", "en"]).optional(),
-    })
+    z
+      .object({
+        messages: z
+          .array(
+            z.object({
+              role: z.enum(["user", "assistant"]),
+              content: z.string().trim().min(1).max(4000),
+            })
+          )
+          .min(1)
+          .max(20),
+        lang: z.enum(["ar", "en"]).optional(),
+      })
+      .refine(
+        (value) => value.messages.reduce((total, message) => total + message.content.length, 0) <= 12000,
+        { message: "The conversation is too long." }
+      )
+      .refine((value) => value.messages.some((message) => message.role === "user"), {
+        message: "A visitor message is required.",
+      })
   )
   .handler(async ({ data, context }) => {
     const history = data.messages
@@ -41,9 +59,18 @@ export const askBasma = createServerFn({ method: "POST" })
     }.`;
 
     const base44 = context.getBase44();
-    const reply = await base44.asServiceRole.integrations.Core.InvokeLLM({ prompt });
+    let reply;
+    try {
+      reply = await withTimeout(base44.asServiceRole.integrations.Core.InvokeLLM({ prompt }), LLM_TIMEOUT_MS);
+    } catch (error) {
+      // A missing platform connection, a provider outage and a timeout all reach
+      // the visitor as a real failure: the chat shows its retry state instead of
+      // pretending an answer exists.
+      throw new Error(error?.message === "assistant-timeout" ? "The assistant timed out." : "The assistant is unavailable.");
+    }
 
-    return {
-      reply: typeof reply === "string" ? reply.trim() : String(reply ?? ""),
-    };
+    const text = typeof reply === "string" ? reply.trim() : "";
+    if (!text) throw new Error("The assistant returned an empty reply.");
+
+    return { reply: text };
   });

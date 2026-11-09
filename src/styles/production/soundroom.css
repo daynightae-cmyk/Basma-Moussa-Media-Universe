@@ -198,3 +198,11 @@ html[lang="ar"] .sound-standby {
     min-height: 340px;
   }
 }
+
+/* ------------------------------------------------------------- the take deck --- */
+
+/* Arabic is a connected script: letter-spacing and uppercasing harm it. */
+html[lang="ar"] .take-deck__micro {
+  letter-spacing: 0;
+  text-transform: none;
+}

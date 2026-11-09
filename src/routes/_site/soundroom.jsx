@@ -29,12 +29,12 @@ const FACTS = [
 
 const RULES = [
   {
-    ar: "الميكروفون يبقى مغلقًا حتى تضغط «تفعيل الميكروفون» وتمنح الإذن.",
-    en: "The microphone stays closed until you press “Enable microphone” and grant permission.",
+    ar: "الميكروفون يبقى مغلقًا حتى تضغط «بدء التسجيل» وتمنح الإذن.",
+    en: "The microphone stays closed until you press “Start recording” and grant permission.",
   },
   {
-    ar: "لا يُسجَّل الصوت ولا يُخزَّن ولا يُرسل؛ يُحلَّل في المتصفح فقط.",
-    en: "Audio is never recorded, stored or uploaded; it is analysed in the browser only.",
+    ar: "لا يُرسَل أي صوت إلى خادم. التسجيل اختياري ويبقى في ذاكرة هذه الصفحة حتى تغلقها.",
+    en: "No audio is sent to a server. Recording is optional and lives in this page's memory until you close it.",
   },
   {
     ar: "المقاطع داخل الغرف نماذج استوديو حقيقية — وليست حلقات منشورة.",
@@ -76,8 +76,8 @@ function Soundroom() {
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-ivory/58 sm:text-lg">
                 {t({
-                  ar: "أربع غرف بتجربة مختلفة: تسجيل، ومونتاج، وتردد، واستماع. في كل غرفة مقاطع حقيقية تستمع إليها الآن — نماذج تعريفية من الاستوديو، لا حلقات منشورة.",
-                  en: "Four chambers, four different experiences: recording, editing, frequency and listening. Each one holds real takes you can play right now — studio samples, not published episodes.",
+                  ar: "أربع غرف بتجربة مختلفة: تسجيل، ومونتاج، وتردد، واستماع. في غرفة التسجيل يمكنك التقاط مقطع قصير يبقى على جهازك، وفي بقية الغرف نماذج استوديو حقيقية تستمع إليها الآن — لا حلقات منشورة.",
+                  en: "Four chambers, four different experiences: recording, editing, frequency and listening. The booth records a short take that stays on your device, and the other chambers hold real studio samples you can play right now — not published episodes.",
                 })}
               </p>
 
@@ -196,7 +196,7 @@ function Soundroom() {
                 })}
               </ol>
               <p className="mt-4 hidden text-[0.6rem] leading-relaxed text-ivory/30 lg:block">
-                {t({ ar: "الموجة والخط الزمني عناصر بصرية. الصوت في مشغّل كل غرفة.", en: "The waveform and timeline are visuals. The audio lives in each chamber's player." })}
+                {t({ ar: "الموجة والخط الزمني عناصر بصرية. الصوت في مشغّل كل غرفة، وتسجيلك يبقى على جهازك.", en: "The waveform and timeline are visuals. Audio plays in each chamber's player, and your take stays on your device." })}
               </p>
             </nav>
 

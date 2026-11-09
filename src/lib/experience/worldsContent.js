@@ -95,8 +95,8 @@ export const SOUNDROOM_ROOMS = [
     },
     image: ASSETS.frequency,
     honest: {
-      ar: "لا يوجد تسجيل من المتصفح في هذه النسخة. هذه بيئة تصميم تفاعلية.",
-      en: "No in-browser recording in this release. This is an interactive design environment.",
+      ar: "التسجيل يتم داخل هذه الصفحة فقط ولا يُرفع إلى أي خادم؛ إغلاق الصفحة أو إعادة تحميلها يحذف المقطع.",
+      en: "Recording happens inside this page only and is never uploaded; closing or reloading discards the take.",
     },
   },
   {

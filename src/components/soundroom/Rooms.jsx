@@ -3,6 +3,7 @@ import { Image } from "@/components/ui/image";
 import { Mic, Scissors, Volume2, Lock, Waves, Headphones } from "lucide-react";
 import GoldWave from "@/components/cinematic/GoldWave";
 import AudioPlayer from "@/components/soundroom/AudioPlayer";
+import { LocalRecorder } from "@/components/soundroom/local-recorder";
 import { FREQUENCY_MODES } from "@/lib/experience/worldsContent";
 import { AUDIO_DISCLOSURE, tracksFor } from "@/lib/experience/audio";
 import { useI18n } from "@/lib/experience/i18n";
@@ -60,9 +61,13 @@ export function BoothRoom({ room }) {
 
   return (
     <RoomFrame room={room} icon={Mic}>
+      <LocalRecorder />
       <div className="pointer-events-none opacity-70">
         <GoldWave mode="pulse" className="h-24 w-full" bars={80} height={140} />
       </div>
+      <p className="take-deck__micro text-[0.55rem] uppercase tracking-[0.2em] text-gold/70">
+        {t({ ar: "نماذج استوديو — استمع قبل أن تسجّل", en: "Studio samples — listen before you record" })}
+      </p>
       {track ? (
         <AudioPlayer src={track.src} title={track.title} note={track.note} disclosure={AUDIO_DISCLOSURE} />
       ) : null}
