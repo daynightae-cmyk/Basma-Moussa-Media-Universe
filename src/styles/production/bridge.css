@@ -1,0 +1,10 @@
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture){color:#fbf7ef;font-family:var(--font-body);}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .shell{width:min(100% - 2.5rem,1250px);margin-inline:auto;}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .shell--wide{width:min(100% - 2.5rem,1460px);}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .eyebrow{font-size:.73rem;letter-spacing:.12em;color:#d7ab62;}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .display{font-family:var(--font-display);line-height:1.2;}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .display-m{font-size:clamp(2rem,4vw,3.5rem);}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .display-l{font-size:clamp(2.3rem,5vw,4.7rem);}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .lead{font-size:clamp(.95rem,1.4vw,1.12rem);line-height:1.85;color:rgba(251,247,239,.72);}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .btn{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1.2rem;border:1px solid rgba(215,171,98,.5);min-height:44px;}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .btn-ghost{background:rgba(6,9,18,.5);color:#f2d7a0;}

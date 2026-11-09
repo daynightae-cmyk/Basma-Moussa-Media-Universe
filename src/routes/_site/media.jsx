@@ -4,6 +4,7 @@ import { Search, ArrowUpRight, RotateCcw } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { WORLDS, STATUS_LABEL } from "@/lib/experience/content";
 import { useI18n } from "@/lib/experience/i18n";
+import { MediaGalaxy } from "@/components/media/media-galaxy";
 
 const CATEGORIES = [
   { id: "all", label: { ar: "كل العوالم", en: "All worlds" } },
@@ -35,7 +36,7 @@ export const Route = createFileRoute("/_site/media")({
 });
 
 function Media() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
 
@@ -54,6 +55,7 @@ function Media() {
 
   return (
     <div className="bg-ink-900">
+      <div className="pt-20"><MediaGalaxy locale={lang} /></div>
       <header className="border-b border-gold/10 px-5 pb-14 pt-32 sm:px-8 sm:pt-36">
         <div className="mx-auto max-w-[1400px]">
           <div className="flex items-center gap-3">

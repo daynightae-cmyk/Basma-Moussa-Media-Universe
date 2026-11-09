@@ -7,6 +7,7 @@ import { useI18n } from "@/lib/experience/i18n";
 
 const LINKS = [
   { href: "/media", label: { ar: "عالم الإعلام", en: "Media Universe" } },
+  { href: "/atelier", label: { ar: "معمل الحكاية", en: "Story Atelier" } },
   { href: "/studio", label: { ar: "الاستوديو", en: "Studio" } },
   { href: "/soundroom", label: { ar: "مساحة صوت", en: "Soundroom" } },
   { href: "/legal-lens", label: { ar: "من زاوية القانون", en: "Legal Lens" } },

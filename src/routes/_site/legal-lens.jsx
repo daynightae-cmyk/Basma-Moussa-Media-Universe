@@ -6,6 +6,7 @@ import CompareSlider from "@/components/CompareSlider";
 import { LEGAL_OUTLINES, SOURCES, LEGAL_DISCLAIMER } from "@/lib/experience/worldsContent";
 import { ASSETS } from "@/lib/experience/assets";
 import { useI18n } from "@/lib/experience/i18n";
+import { JusticePrism } from "@/components/media/justice-prism";
 
 const FILTERS = [
   { id: "all", label: { ar: "كل المواضيع", en: "All topics" } },
@@ -27,7 +28,7 @@ export const Route = createFileRoute("/_site/legal-lens")({
 });
 
 function LegalLens() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [filter, setFilter] = useState("all");
   const [openId, setOpenId] = useState(null);
 
@@ -37,6 +38,19 @@ function LegalLens() {
 
   return (
     <div className="bg-ink-900">
+      <div className="mx-auto max-w-[1400px] px-5 pt-28 sm:px-8">
+        <JusticePrism locale={lang}
+          eyebrow={t({ ar: "من زاوية القانون", en: "The Legal Lens" })}
+          title={t({ ar: "منشور الرؤى القانونية", en: "The Justice Prism" })}
+          lead={t({ ar: "زوايا تحريرية مستندة إلى مصادر رسمية. تصوّرات تعليمية، وليست أحكامًا أو استشارات.", en: "Editorial perspectives with official sources. Educational concepts, not legal advice or judgments." })}
+          hint={t({ ar: "اسحب المنشور أو استخدم مفاتيح الأسهم لاختيار زاوية.", en: "Drag the prism or use arrow keys to select a facet." })}
+          facetLabel={t({ ar: "الزاوية", en: "Facet" })}
+          sourceLabel={t({ ar: "المصدر الرسمي", en: "Official source" })}
+          statusLabel={t({ ar: "مخطط تحريري", en: "Editorial outline" })}
+          externalLinkLabel={t({ ar: "رابط خارجي", en: "External link" })}
+          opensInNewTabLabel={t({ ar: "يفتح في تبويب جديد", en: "Opens in new tab" })}
+        />
+      </div>
       <header className="relative overflow-hidden border-b border-gold/10 px-5 pb-14 pt-32 sm:px-8 sm:pt-36">
         <div className="pointer-events-none absolute inset-0 opacity-30" style={{ background: "radial-gradient(50% 60% at 85% 20%, rgba(215,171,98,0.2), transparent 70%)" }} aria-hidden="true" />
         <div className="relative mx-auto max-w-[1400px]">

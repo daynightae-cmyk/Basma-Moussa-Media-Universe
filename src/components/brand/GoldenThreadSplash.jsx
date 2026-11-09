@@ -23,14 +23,17 @@ const draw = (delay, duration = 1.5) => ({
 export default function GoldenThreadSplash({ onDone }) {
   const { t, isAr } = useI18n();
   const reduce = useReducedMotion();
-  const [open, setOpen] = useState(() => {
-    try {
-      return window.sessionStorage.getItem(SEEN_KEY) !== "1";
-    } catch {
-      return true;
-    }
-  });
+  // Keep server HTML and first client render deterministic.
+  const [open, setOpen] = useState(true);
   const timer = useRef(null);
+
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem(SEEN_KEY) === "1") setOpen(false);
+    } catch {
+      /* Storage unavailable: keep the intro accessible and skippable. */
+    }
+  }, []);
 
   const finish = useCallback(() => {
     try {

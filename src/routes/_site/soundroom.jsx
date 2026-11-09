@@ -1,8 +1,13 @@
+const SONIC_COPY = {
+  ar: { enable: "تفعيل الميكروفون", stop: "إيقاف", requesting: "جاري طلب الإذن", denied: "تم رفض الإذن", unsupported: "الميكروفون غير مدعوم", error: "تعذّر التقاط الصوت", idle: "الميكروفون مغلق", live: "الميكروفون يعمل محليًا", meterLabel: "مستوى الصوت", low: "منخفض", mid: "متوسط", high: "مرتفع", privacy: "تحليل محلي فقط — لا تسجيل أو إرسال للصوت." },
+  en: { enable: "Enable microphone", stop: "Stop", requesting: "Requesting permission", denied: "Microphone permission denied", unsupported: "Microphone unsupported", error: "Cannot capture audio", idle: "Microphone off", live: "Microphone active locally", meterLabel: "Audio level", low: "Low", mid: "Mid", high: "High", privacy: "On-device analysis only — no recording or upload." },
+};
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { SOUNDROOM_ROOMS } from "@/lib/experience/worldsContent";
 import { ROOM_COMPONENTS } from "@/components/soundroom/Rooms";
 import { useI18n } from "@/lib/experience/i18n";
+import { SonicSculpture } from "@/components/media/sonic-sculpture";
 
 export const Route = createFileRoute("/_site/soundroom")({
   validateSearch: (search) => ({ room: typeof search.room === "string" ? search.room : undefined }),
@@ -16,7 +21,7 @@ export const Route = createFileRoute("/_site/soundroom")({
 });
 
 function Soundroom() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { room: requested } = Route.useSearch();
   const navigate = useNavigate({ from: "/soundroom" });
 
@@ -28,6 +33,9 @@ function Soundroom() {
 
   return (
     <div className="bg-ink-900">
+      <section className="mx-auto max-w-[1400px] px-5 pt-28 sm:px-8" aria-label={lang === "ar" ? "نحت الصوت المباشر" : "Live sound sculpture"}>
+        <SonicSculpture locale={lang} copy={SONIC_COPY[lang]} />
+      </section>
       <header className="px-5 pb-10 pt-32 sm:px-8 sm:pt-36">
         <div className="mx-auto max-w-[1400px]">
           <div className="flex items-center gap-3">
@@ -48,9 +56,9 @@ function Soundroom() {
 
       <section className="px-5 pb-20 sm:px-8">
         <div className="mx-auto max-w-[1400px]">
-          <div className="grid gap-8 lg:grid-cols-[240px_1fr] lg:items-start">
-            <nav aria-label={t({ ar: "غرف الصوت", en: "Sound chambers" })} className="lg:sticky lg:top-28">
-              <ol className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible">
+          <div className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start">
+            <nav aria-label={t({ ar: "غرف الصوت", en: "Sound chambers" })} className="min-w-0 max-w-full lg:sticky lg:top-28">
+              <ol className="flex max-w-full gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible">
                 {SOUNDROOM_ROOMS.map((item) => {
                   const active = item.id === room.id;
                   return (
@@ -90,7 +98,7 @@ function Soundroom() {
               </p>
             </nav>
 
-            <div className="min-h-[420px]">
+            <div className="min-h-[420px] min-w-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={room.id}

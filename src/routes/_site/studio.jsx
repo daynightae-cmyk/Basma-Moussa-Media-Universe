@@ -5,6 +5,8 @@ import { Image } from "@/components/ui/image";
 import { STUDIO_SCENES, CAMERA_VIEWS, LIGHTING_MODES } from "@/lib/experience/worldsContent";
 import { PROGRAMS, STATUS_LABEL } from "@/lib/experience/content";
 import { useI18n } from "@/lib/experience/i18n";
+import { StudioExperience } from "@/components/studio/studio-experience";
+import { getDictionary } from "@/lib/production/dictionary";
 
 export const Route = createFileRoute("/_site/studio")({
   head: () => ({
@@ -17,7 +19,7 @@ export const Route = createFileRoute("/_site/studio")({
 });
 
 function Studio() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [sceneId, setSceneId] = useState(STUDIO_SCENES[0].id);
   const [cameraId, setCameraId] = useState(CAMERA_VIEWS[0].id);
   const [lightId, setLightId] = useState(LIGHTING_MODES[0].id);
@@ -40,6 +42,7 @@ function Studio() {
 
   return (
     <div className="bg-ink-900">
+      <div className="pt-16"><StudioExperience dict={getDictionary(lang)} locale={lang} /></div>
       <header className="px-5 pb-8 pt-32 sm:px-8 sm:pt-36">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-5">
           <div className="flex items-center gap-3">
