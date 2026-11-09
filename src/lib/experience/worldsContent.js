@@ -161,6 +161,14 @@ export const LEGAL_OUTLINES = [
     status: "outline",
     sources: ["uae-legislation"],
     topic: "law",
+    question: {
+      ar: "ما الذي يقرره النص فعلًا، وما الذي يتركه للتفسير؟",
+      en: "What does the text actually decide, and what does it leave open to interpretation?",
+    },
+    context: {
+      ar: "نبدأ من بوابة التشريعات، ثم نتحقق من تاريخ النفاذ والنسخة السارية قبل أي شرح.",
+      en: "We begin at the legislation portal, then verify the commencement date and the version in force before explaining anything.",
+    },
   },
   {
     id: "verify-legal-headline",
@@ -173,6 +181,14 @@ export const LEGAL_OUTLINES = [
     status: "outline",
     sources: ["uae-legislation", "sgmb"],
     topic: "media",
+    question: {
+      ar: "من نشر الخبر أولًا، وأين النص الأصلي الذي يستند إليه؟",
+      en: "Who published the claim first, and where is the original text it relies on?",
+    },
+    context: {
+      ar: "الخبر ليس مصدرًا قانونيًا. نفصل بين البيان الإعلامي والنص الرسمي وتاريخ المراجعة.",
+      en: "A news item is not a legal source. We separate the media statement, the official text and the review date.",
+    },
   },
   {
     id: "egypt-uae-legal-contexts",
@@ -185,6 +201,14 @@ export const LEGAL_OUTLINES = [
     status: "outline",
     sources: ["uae-legislation", "dubai-legal"],
     topic: "comparison",
+    question: {
+      ar: "أي بيئة قانونية تحكم السؤال، وأين تنتهي المقارنة؟",
+      en: "Which legal environment governs the question, and where does the comparison end?",
+    },
+    context: {
+      ar: "تشابه اللغة لا يعني وحدة الأحكام. نعرض السياقين كقراءتين منفصلتين، دون ترجيح.",
+      en: "Shared language does not mean shared rulings. We present the two contexts as separate readings, without deciding between them.",
+    },
   },
   {
     id: "contract-language-first-read",
@@ -197,6 +221,14 @@ export const LEGAL_OUTLINES = [
     status: "outline",
     sources: ["uae-legislation"],
     topic: "law",
+    question: {
+      ar: "من يلتزم بماذا، وأي قانون يحكم العقد؟",
+      en: "Who commits to what, and which law governs the contract?",
+    },
+    context: {
+      ar: "نقرأ الأطراف والالتزام والمدة والإنهاء أولًا، ثم نعود إلى المرجع التشريعي.",
+      en: "We read the parties, the obligation, the term and the termination first, then return to the legislative reference.",
+    },
   },
 ];
 

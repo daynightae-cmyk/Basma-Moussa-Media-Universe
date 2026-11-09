@@ -157,6 +157,14 @@ function ChapterPanel({ chapter, index, active, compact = false }) {
   const { t, isAr } = useI18n();
   const Arrow = isAr ? ArrowLeft : ArrowRight;
   const isFrequency = chapter.atmosphere === "frequency";
+  const isLegal = chapter.atmosphere === "legal";
+  const isCity = chapter.atmosphere === "city";
+
+  const stage = isFrequency
+    ? "items-center justify-center text-center"
+    : isLegal
+      ? "items-end justify-end"
+      : "items-start justify-end";
 
   return (
     <article
@@ -168,35 +176,65 @@ function ChapterPanel({ chapter, index, active, compact = false }) {
         src={chapter.image}
         alt={t({ ar: `صورة توضيحية — ${t(chapter.title)}`, en: `Illustrative image — ${t(chapter.title)}` })}
         fittingType="fill"
-        className="absolute inset-0 h-full w-full"
+        className={`absolute inset-0 h-full w-full ${isFrequency ? "opacity-30" : ""}`}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/70 to-ink-900/30" />
       {isFrequency && (
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 opacity-70">
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 opacity-80">
           <GoldWave mode="slow" className="h-[40vh] w-full" bars={90} height={300} />
         </div>
       )}
+      {isCity && (
+        <div className="pointer-events-none absolute inset-y-10 end-6 hidden w-px bg-gradient-to-b from-transparent via-gold/40 to-transparent sm:block" aria-hidden="true" />
+      )}
       <div className="absolute inset-0 ring-1 ring-inset ring-ivory/5" aria-hidden="true" />
 
-      <span className="pointer-events-none absolute top-16 hidden select-none font-display text-[22vw] leading-none text-ivory/[0.05] lg:block" aria-hidden="true">
+      <span
+        className={`pointer-events-none absolute hidden select-none font-display leading-none text-ivory/[0.055] lg:block ${
+          isLegal ? "bottom-16 end-10 text-[18vw]" : "top-14 start-10 text-[22vw]"
+        }`}
+        aria-hidden="true"
+      >
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      <div className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-end px-6 pb-24 pt-24 sm:px-12 lg:px-20">
-        <div className="max-w-xl border-s border-gold/40 ps-5 sm:ps-7">
+      <div className={`relative z-10 mx-auto flex h-full max-w-[1400px] px-6 pb-24 pt-24 sm:px-12 lg:px-20 ${stage}`}>
+        <div
+          className={`${
+            isFrequency
+              ? "max-w-2xl border-y border-gold/25 px-6 py-10 sm:px-12"
+              : isLegal
+                ? "max-w-xl border-e border-gold/40 pe-5 text-end sm:pe-7"
+                : "max-w-xl border-s border-gold/40 ps-5 sm:ps-7"
+          }`}
+        >
           <p className="eyebrow text-gold/85">{t(chapter.number)}</p>
           <h3 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.12] text-ivory">
             {t(chapter.title)}
           </h3>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-ivory/60 sm:text-base">{t(chapter.lead)}</p>
+          <p className={`mt-4 max-w-md text-sm leading-relaxed text-ivory/60 sm:text-base ${isLegal ? "ms-auto" : ""}`}>
+            {t(chapter.lead)}
+          </p>
           <Link
             to={chapter.cta.href}
-            className="group/link mt-6 inline-flex items-center gap-2 border-b border-gold/40 pb-1 text-[0.68rem] tracking-[0.18em] text-gold transition-colors hover:border-gold"
+            className={`group/link mt-6 inline-flex items-center gap-2 border-b border-gold/40 pb-1 text-[0.68rem] tracking-[0.18em] text-gold transition-colors hover:border-gold ${
+              isFrequency ? "justify-center" : ""
+            }`}
           >
             {t(chapter.cta.label)}
             <Arrow className="h-3.5 w-3.5 transition-transform duration-500 group-hover/link:translate-x-1 rtl:group-hover/link:-translate-x-1" />
           </Link>
         </div>
+      </div>
+
+      <div
+        className={`absolute top-20 z-10 hidden items-center gap-3 text-[0.55rem] uppercase tracking-[0.24em] text-ivory/40 sm:flex ${
+          isLegal ? "start-8" : "end-8"
+        }`}
+        aria-hidden="true"
+      >
+        <span className="h-px w-8 bg-gold/40" />
+        {t(chapter.number)}
       </div>
     </article>
   );

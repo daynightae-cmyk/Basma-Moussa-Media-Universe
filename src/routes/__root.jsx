@@ -22,12 +22,13 @@ export const Route = createRootRoute({
       { name: "theme-color", content: "#070B18" },
     ],
     links: [
+      { rel: "icon", href: "/brand/2766240fc_basma-logo-master.png", type: "image/png" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap",
       },
     ],
   }),
@@ -51,9 +52,17 @@ function RootComponent() {
 // The document. There is no index.html: the server renders <html> from here.
 function RootDocument({ children }) {
   return (
-    <html lang="ar" dir="rtl">
+    // The pre-hydration intro script intentionally adds data-intro-seen to <html>.
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
         <HeadContent />
+        {/* Before the first paint: a returning visitor never sees the intro flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('bm-intro-seen')==='1')document.documentElement.setAttribute('data-intro-seen','1')}catch(e){}",
+          }}
+        />
       </head>
       {/* data-react-root: the builder's preview bridge looks for #root and falls back to this. */}
       <body data-react-root="true">

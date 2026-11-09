@@ -8,3 +8,6 @@
 :where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .lead{font-size:clamp(.95rem,1.4vw,1.12rem);line-height:1.85;color:rgba(251,247,239,.72);}
 :where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .btn{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1.2rem;border:1px solid rgba(215,171,98,.5);min-height:44px;}
 :where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .btn-ghost{background:rgba(6,9,18,.5);color:#f2d7a0;}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .btn-gold{background:#d7ab62;border-color:#d7ab62;color:#12100b;font-weight:600;letter-spacing:.06em;}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .btn-gold:hover{background:#e8c98f;}
+:where(.studio-experience,.atelier,.galaxy,.prism,.sculpture) .btn:disabled{opacity:.35;cursor:not-allowed;}

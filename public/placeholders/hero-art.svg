@@ -1,20 +1,87 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-<defs>
-<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#040816"/><stop offset=".47" stop-color="#17142b"/><stop offset="1" stop-color="#080d19"/></linearGradient>
-<radialGradient id="glow"><stop stop-color="#d7a762" stop-opacity=".42"/><stop offset="1" stop-color="#d7a762" stop-opacity="0"/></radialGradient>
-<linearGradient id="gold" x2="1" y2=".2"><stop stop-color="#725027"/><stop offset=".52" stop-color="#f3d499"/><stop offset="1" stop-color="#967047"/></linearGradient>
-</defs>
-<rect width="1600" height="900" fill="url(#bg)"/>
-<ellipse cx="1090" cy="400" rx="560" ry="450" fill="url(#glow)"/>
-<g fill="none" stroke="url(#gold)">
-<circle cx="1120" cy="385" r="235" stroke-width="2.5" opacity=".85"/>
-<circle cx="1120" cy="385" r="205" opacity=".48"/>
-<circle cx="1120" cy="385" r="155" opacity=".22"/>
-<path d="M-100 850C315 220 670 845 1065 340S1480 455 1750-80" stroke-width="5" opacity=".9"/>
-<path d="M-90 800C335 185 685 775 1020 285S1510 430 1730-90" stroke-width="1.5" opacity=".5"/>
-<path d="M-90 870C355 275 695 895 1115 375S1510 500 1720-10" stroke-width="1.2" opacity=".35"/>
-<rect x="815" y="125" width="600" height="530" rx="6" stroke-width="1.5" opacity=".3"/>
-</g>
-<path d="M890 170h440v440H890z" fill="#d4a76d" fill-opacity=".035"/>
-<g fill="#eac586" opacity=".55"><circle cx="430" cy="210" r="3"/><circle cx="650" cy="540" r="2"/><circle cx="1430" cy="220" r="3"/><circle cx="1520" cy="720" r="2"/></g>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#03060F"/>
+      <stop offset="0.48" stop-color="#0A1122"/>
+      <stop offset="1" stop-color="#05080F"/>
+    </linearGradient>
+    <radialGradient id="warm" cx="50%" cy="50%" r="50%">
+      <stop stop-color="#E8C98F" stop-opacity="0.20"/>
+      <stop offset="0.55" stop-color="#C89B56" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#C89B56" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cool" cx="50%" cy="50%" r="50%">
+      <stop stop-color="#3E5B8F" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#3E5B8F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="1" x2="1" y2="0">
+      <stop stop-color="#6B4E25"/>
+      <stop offset="0.45" stop-color="#F2D7A0"/>
+      <stop offset="1" stop-color="#9C7738"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0.7" y2="1">
+      <stop stop-color="#F2D7A0" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#F2D7A0" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <ellipse cx="1110" cy="390" rx="620" ry="470" fill="url(#warm)"/>
+  <ellipse cx="210" cy="760" rx="540" ry="360" fill="url(#cool)"/>
+
+  <!-- distant architecture: three receding arches -->
+  <g fill="none" stroke="url(#gold)">
+    <path d="M840 760V420c0-250 440-250 440 0v340" stroke-width="1.4" opacity="0.32"/>
+    <path d="M895 760V432c0-205 330-205 330 0v328" stroke-width="1" opacity="0.22"/>
+    <path d="M960 760V445c0-150 200-150 200 0v315" stroke-width="0.9" opacity="0.16"/>
+    <path d="M1060 470c0-55 70-55 70 0v290" stroke-width="0.8" opacity="0.12"/>
+  </g>
+  <path d="M840 760V420c0-250 440-250 440 0v340" fill="#E8C98F" fill-opacity="0.015"/>
+
+  <!-- light architecture -->
+  <path d="M120 -80L520 900H80Z" fill="url(#beam)" filter="url(#soft)"/>
+  <path d="M1500 60L1240 900h300Z" fill="url(#beam)" opacity="0.5" filter="url(#soft)"/>
+
+  <!-- the thread that runs through the universe -->
+  <g fill="none" stroke="url(#gold)">
+    <path d="M-120 780C330 300 560 820 900 350S1390 470 1740 40" stroke-width="4" opacity="0.55"/>
+    <path d="M-120 816C330 336 560 856 900 386S1390 506 1740 76" stroke-width="1.2" opacity="0.4"/>
+    <path d="M-120 744C330 264 560 784 900 314S1390 434 1740 4" stroke-width="0.9" opacity="0.24"/>
+  </g>
+  <circle cx="1006" cy="282" r="4" fill="#FFF4D8" filter="url(#glow)" opacity="0.8"/>
+
+  <!-- floor plane and its reflection columns -->
+  <path d="M0 760H1600" stroke="#D7AB62" stroke-opacity="0.18"/>
+  <g stroke="#D7AB62" stroke-opacity="0.10">
+    <path d="M0 900L800 760l800 140"/>
+    <path d="M240 900L800 760l560 140"/>
+    <path d="M480 900L800 760l320 140"/>
+    <path d="M720 900L800 760l80 140"/>
+  </g>
+  <path d="M840 760h440v140H840z" fill="#E8C98F" fill-opacity="0.02"/>
+
+  <!-- film sprockets along the edge of the frame -->
+  <g fill="#E8C98F" fill-opacity="0.16">
+    <rect x="64" y="60" width="10" height="16" rx="2"/><rect x="62" y="118" width="10" height="16" rx="2"/>
+    <rect x="65" y="176" width="10" height="16" rx="2"/><rect x="63" y="234" width="10" height="16" rx="2"/>
+    <rect x="66" y="292" width="10" height="16" rx="2"/><rect x="63" y="350" width="10" height="16" rx="2"/>
+    <rect x="1526" y="60" width="10" height="16" rx="2"/><rect x="1524" y="118" width="10" height="16" rx="2"/>
+    <rect x="1527" y="176" width="10" height="16" rx="2"/><rect x="1525" y="234" width="10" height="16" rx="2"/>
+    <rect x="1528" y="292" width="10" height="16" rx="2"/><rect x="1525" y="350" width="10" height="16" rx="2"/>
+  </g>
+
+  <!-- dust -->
+  <g fill="#F2D7A0" opacity="0.55">
+    <circle cx="368" cy="196" r="2"/><circle cx="622" cy="540" r="1.5"/>
+    <circle cx="1298" cy="214" r="2"/><circle cx="1436" cy="676" r="1.5"/>
+    <circle cx="212" cy="430" r="1.2"/><circle cx="964" cy="128" r="1.4"/>
+    <circle cx="1160" cy="708" r="1.8"/><circle cx="760" cy="332" r="1.1"/>
+  </g>
 </svg>

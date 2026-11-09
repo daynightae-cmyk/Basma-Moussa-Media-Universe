@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Soundroom — the entrance before any microphone is opened.
+   ========================================================================== */
+
+.sound-hero {
+  background:
+    radial-gradient(70% 75% at 82% 8%, rgba(38, 55, 88, 0.5), transparent 64%),
+    linear-gradient(180deg, #05080f 0%, #070b15 100%);
+  border-bottom: 1px solid rgba(215, 171, 98, 0.12);
+}
+
+.sound-hero__beam {
+  position: absolute;
+  top: -28%;
+  inset-inline-end: 8%;
+  width: 48%;
+  height: 150%;
+  background: conic-gradient(from 186deg at 64% 0%, transparent 0deg, rgba(242, 215, 160, 0.1) 14deg, transparent 31deg);
+  filter: blur(30px);
+  pointer-events: none;
+}
+.sound-hero > div {
+  position: relative;
+}
+
+.sound-standby {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.8rem;
+  border: 1px solid rgba(215, 171, 98, 0.32);
+  background: rgba(8, 12, 23, 0.66);
+  font-size: 0.56rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(251, 247, 239, 0.52);
+}
+.sound-standby__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d7ab62;
+  box-shadow: 0 0 8px rgba(215, 171, 98, 0.85);
+}
+html[lang="ar"] .sound-standby {
+  letter-spacing: 0;
+  font-size: 0.68rem;
+  text-transform: none;
+}
+
+/* ------------------------------------------------------------- the diagram --- */
+
+.sound-hero__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 380px;
+  padding: 1.8rem;
+  border: 1px solid rgba(215, 171, 98, 0.22);
+  background:
+    radial-gradient(60% 55% at 50% 46%, rgba(215, 171, 98, 0.11), transparent 72%),
+    linear-gradient(180deg, rgba(13, 19, 34, 0.7), rgba(5, 8, 15, 0.8));
+  overflow: hidden;
+}
+
+.sound-hero__visual::before,
+.sound-hero__visual::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(215, 171, 98, 0.5);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+}
+.sound-hero__visual::before {
+  top: -1px;
+  inset-inline-start: -1px;
+  border-top-width: 1px;
+  border-inline-start-width: 1px;
+}
+.sound-hero__visual::after {
+  bottom: -1px;
+  inset-inline-end: -1px;
+  border-bottom-width: 1px;
+  border-inline-end-width: 1px;
+}
+
+.sound-orbit {
+  position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 1;
+  transform: rotateX(56deg);
+  transform-style: preserve-3d;
+}
+
+.sound-orbit__ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(215, 171, 98, 0.36);
+  border-radius: 50%;
+}
+.sound-orbit__ring--a {
+  inset: 12%;
+  border-color: rgba(215, 171, 98, 0.58);
+  box-shadow: 0 0 54px rgba(215, 171, 98, 0.18);
+}
+.sound-orbit__ring--a::before,
+.sound-orbit__ring--a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: #f2d7a0;
+  box-shadow: 0 0 14px rgba(242, 215, 160, 0.9);
+}
+.sound-orbit__ring--a::before {
+  inset-inline-start: -3px;
+}
+.sound-orbit__ring--a::after {
+  inset-inline-end: -3px;
+}
+.sound-orbit__ring--b {
+  inset: 25%;
+  border-style: dashed;
+  border-color: rgba(242, 215, 160, 0.45);
+  animation: sound-orbit-turn 60s linear infinite;
+}
+.sound-orbit__ring--c {
+  inset: 39%;
+  border-color: rgba(251, 247, 239, 0.24);
+}
+
+.sound-orbit__axis {
+  position: absolute;
+  top: 4%;
+  bottom: 4%;
+  inset-inline-start: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(215, 171, 98, 0.32), transparent);
+}
+
+.sound-orbit__core {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #e8c98f;
+  box-shadow: 0 0 34px rgba(232, 201, 143, 0.75);
+}
+
+.sound-hero__readout {
+  position: absolute;
+  inset-inline: 1.2rem;
+  bottom: 2.7rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid rgba(215, 171, 98, 0.18);
+  font-size: 0.52rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(251, 247, 239, 0.34);
+}
+
+.sound-hero__caption {
+  position: absolute;
+  inset-inline: 1.2rem;
+  bottom: 0.9rem;
+  margin: 0;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  color: rgba(251, 247, 239, 0.28);
+}
+
+@keyframes sound-orbit-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-orbit__ring--b {
+    animation: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sound-hero__visual {
+    min-height: 340px;
+  }
+}

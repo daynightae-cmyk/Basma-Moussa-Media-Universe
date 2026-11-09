@@ -49,20 +49,42 @@ export default function HeroScene({ scene }) {
   if (scene.composition === "portrait") {
     return (
       <div className="relative h-full w-full overflow-hidden bg-ink-900">
-        <Image src={scene.image} alt="" fittingType="fill" className="absolute inset-0 h-full w-full opacity-45" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-900 via-ink-900/92 to-ink-900/35 rtl:bg-gradient-to-l" />
-        <div className="relative z-10 mx-auto flex h-full max-w-[1400px] items-center px-5 pb-28 pt-28 sm:px-8">
-          <div className="grid w-full items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="max-w-2xl">
+        <motion.div
+          initial={{ scale: 1.06, x: -18 }}
+          animate={{ scale: 1, x: 0 }}
+          transition={{ duration: 9, ease: "linear" }}
+          className="absolute inset-0"
+        >
+          <Image src={scene.image} alt="" fittingType="fill" className="h-full w-full opacity-70" />
+        </motion.div>
+        <div className="absolute inset-0 bg-[linear-gradient(100deg,#05080f_0%,rgba(5,8,15,0.94)_34%,rgba(5,8,15,0.55)_62%,rgba(5,8,15,0.18)_100%)] rtl:bg-[linear-gradient(260deg,#05080f_0%,rgba(5,8,15,0.94)_34%,rgba(5,8,15,0.55)_62%,rgba(5,8,15,0.18)_100%)]" />
+        {/* The arch is hidden below lg; mobile gets the same art as a full-bleed ground. */}
+        <div className="pointer-events-none absolute inset-0 lg:hidden" aria-hidden="true">
+          <Image src={scene.foreground || scene.image} alt="" fittingType="fill" className="h-full w-full object-cover opacity-55" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,15,0.32)_0%,rgba(5,8,15,0.7)_46%,#05080f_94%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,8,15,0.94)_0%,rgba(5,8,15,0.44)_62%,rgba(5,8,15,0.2)_100%)] rtl:bg-[linear-gradient(270deg,rgba(5,8,15,0.94)_0%,rgba(5,8,15,0.44)_62%,rgba(5,8,15,0.2)_100%)]" />
+        </div>
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-900 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink-900/80 to-transparent" aria-hidden="true" />
+
+        <div className="relative z-10 mx-auto flex h-full max-w-[1400px] items-center px-5 pb-28 pt-24 sm:px-8">
+          <div className="grid w-full items-center gap-10 lg:grid-cols-[1.06fr_0.94fr]">
+            <div className="relative max-w-2xl">
+              <span
+                className="pointer-events-none absolute -top-24 hidden select-none font-display text-[11rem] leading-none text-gold/[0.055] xl:block"
+                aria-hidden="true"
+              >
+                01
+              </span>
               <Chapter>{t(scene.chapter)}</Chapter>
               <motion.h1
                 id="hero-title"
                 {...fadeUp}
-                className="mt-6 font-display text-[clamp(2.6rem,6.2vw,4.8rem)] leading-[1.08] text-ivory"
+                className="mt-6 font-display text-[clamp(2.7rem,6.2vw,5.1rem)] leading-[1.04] text-ivory"
               >
                 {t(scene.title)}
               </motion.h1>
-              <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.12 }} className="mt-6 max-w-lg text-base leading-relaxed text-ivory/65 sm:text-lg">
+              <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.12 }} className="mt-6 max-w-lg text-base leading-relaxed text-ivory/68 sm:text-lg">
                 {t(scene.lead)}
               </motion.p>
               <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.22 }} className="mt-9">
@@ -72,15 +94,32 @@ export default function HeroScene({ scene }) {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative mx-auto hidden w-full max-w-[330px] lg:block"
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+              className="relative mx-auto hidden w-full max-w-[430px] lg:block xl:max-w-[480px]"
             >
-              <div className="absolute -inset-3 border border-gold/25 arch" aria-hidden="true" />
-              <div className="relative overflow-hidden arch">
-                <Image src={scene.foreground || scene.image} alt={t({ ar: "فن تجريدي مؤقت بدون صورة شخصية", en: "Temporary abstract concept art, not a portrait" })} fittingType="fill" className="aspect-[3/4] w-full" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900/70 via-transparent to-transparent" />
+              <div className="absolute -inset-x-6 -inset-y-4 border border-gold/15 arch" aria-hidden="true" />
+              <div className="absolute -inset-x-2 -inset-y-2 border border-gold/30 arch" aria-hidden="true" />
+              <div className="relative overflow-hidden arch shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]">
+                <Image
+                  src={scene.foreground || scene.image}
+                  alt={t({ ar: "فن تجريدي معماري — ليس صورة شخصية", en: "Original abstract architectural art — not a portrait" })}
+                  fittingType="fill"
+                  className="aspect-[3/4] w-full"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900/80 via-transparent to-ink-900/10" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
+                  <p className="text-[0.55rem] uppercase tracking-[0.24em] text-ivory/55">
+                    {t({ ar: "فن بصري أصلي", en: "Original visual art" })}
+                  </p>
+                  <span className="h-px w-14 bg-gold/60" aria-hidden="true" />
+                </div>
+              </div>
+              <div className="pointer-events-none absolute inset-y-10 -end-9 hidden w-[3px] flex-col justify-between xl:flex" aria-hidden="true">
+                <span className="h-10 w-px bg-gold/40" />
+                <span className="text-[0.5rem] tracking-[0.3em] text-gold/50 [writing-mode:vertical-rl]">BASMA · SHARJAH</span>
+                <span className="h-10 w-px bg-gold/40" />
               </div>
             </motion.div>
           </div>

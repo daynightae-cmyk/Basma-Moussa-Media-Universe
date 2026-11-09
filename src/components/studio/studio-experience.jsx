@@ -32,7 +32,7 @@ function formatDuration(totalSeconds) {
 function StudioExperience({ dict, locale }) {
   const [sceneId, setSceneId] = useState("one-on-one");
   const [items, setItems] = useState(() => layoutFor("one-on-one"));
-  const [selectedId, setSelectedId] = useState("chair-host");
+  const [selectedId, setSelectedId] = useState(null);
   const [camera, setCamera] = useState("master");
   const [lighting, setLighting] = useState(
     () => lightingForPreset("warm-broadcast")
@@ -137,19 +137,8 @@ function StudioExperience({ dict, locale }) {
     () => SCENE_PRESETS.find((preset) => preset.id === sceneId)?.label[locale] ?? "",
     [locale, sceneId]
   );
-  return <section className="studio-experience" id="studio-experience" aria-labelledby="studio-experience-title">
+  return <section className="studio-experience" id="studio-experience" aria-label={dict.studio.experienceTitle}>
       <div className="shell shell--wide">
-        <header className="studio-experience__head">
-          <div>
-            <p className="eyebrow eyebrow-gold">{dict.nav.studio}</p>
-            <h2 id="studio-experience-title" className="display display-m">
-              {dict.studio.experienceTitle}
-            </h2>
-            <p className="lead">{dict.studio.experienceLead}</p>
-          </div>
-          <p className="studio-preview-badge">{dict.studio.previewNotice}</p>
-        </header>
-
         <div className="studio-layout">
           <div className="studio-layout__stage">
             <StudioStage

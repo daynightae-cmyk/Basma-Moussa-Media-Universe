@@ -1,13 +1,12 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, ArrowUpRight, RotateCcw } from "lucide-react";
-import { Image } from "@/components/ui/image";
 import { WORLDS, STATUS_LABEL } from "@/lib/experience/content";
 import { useI18n } from "@/lib/experience/i18n";
 import { MediaGalaxy } from "@/components/media/media-galaxy";
 
 const CATEGORIES = [
-  { id: "all", label: { ar: "كل العوالم", en: "All worlds" } },
+  { id: "all", label: { ar: "الكل", en: "All" } },
   { id: "conversation", label: { ar: "حوارات", en: "Conversation" } },
   { id: "audio", label: { ar: "صوت", en: "Audio" } },
   { id: "legal", label: { ar: "قانون", en: "Legal" } },
@@ -55,35 +54,45 @@ function Media() {
 
   return (
     <div className="bg-ink-900">
-      <div className="pt-20"><MediaGalaxy locale={lang} /></div>
-      <header className="border-b border-gold/10 px-5 pb-14 pt-32 sm:px-8 sm:pt-36">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-gold/70" aria-hidden="true" />
-            <span className="eyebrow">{t({ ar: "خريطة العوالم", en: "The universe map" })}</span>
-          </div>
-          <h1 className="mt-5 max-w-3xl font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.08] text-ivory">
-            {t({ ar: "عالم الإعلام", en: "The Media Universe" })}
-          </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-ivory/55">
-            {t({
-              ar: "ستة عوالم، كل واحد بيئة تفاعل مختلفة. ابحث بالعنوان أو الموضوع، أو صفِّ حسب النوع.",
-              en: "Six worlds, each a different interaction environment. Search by title or theme, or filter by kind.",
-            })}
-          </p>
+      <h1 className="sr-only">{t({ ar: "عالم الإعلام", en: "The Media Universe" })}</h1>
 
-          <div className="mt-9 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <label className="relative flex w-full max-w-md items-center">
+      {/* The galaxy is the hero: one entrance, no repeated title block above it. */}
+      <div className="pt-16">
+        <MediaGalaxy locale={lang} />
+      </div>
+
+      <section className="border-t border-gold/10 px-5 pb-14 pt-9 sm:px-8 sm:pb-20 sm:pt-12" aria-labelledby="worlds-directory-title">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-gold/70" aria-hidden="true" />
+                <span className="eyebrow">{t({ ar: "دليل العوالم", en: "The worlds directory" })}</span>
+              </div>
+              <h2 id="worlds-directory-title" className="mt-4 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.08] text-ivory">
+                {t({ ar: "ستة أبواب، بترتيب واحد.", en: "Six doors, in one order." })}
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-ivory/50 sm:text-base">
+                {t({
+                  ar: "جدول تحريري لكل عالم: الفكرة، الحالة، والمدخل. استخدم البحث أو النوع للوصول السريع — من دون تكرار الصور.",
+                  en: "An editorial index for every world: the idea, the status, and the entrance. Search or filter to jump straight in — without repeating the imagery.",
+                })}
+              </p>
+            </div>
+
+            <label className="relative flex w-full max-w-sm items-center">
               <Search className="pointer-events-none absolute start-4 h-4 w-4 text-ivory/35" aria-hidden="true" />
               <span className="sr-only">{t({ ar: "ابحث في العوالم", en: "Search worlds" })}</span>
               <input
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(event) => setQuery(event.target.value)}
                 placeholder={t({ ar: "ابحث بعنوان أو موضوع…", en: "Search by title or theme…" })}
                 className="w-full border border-ivory/15 bg-ink-800/70 py-3 ps-11 pe-4 text-sm text-ivory placeholder:text-ivory/30 focus:border-gold/60 focus:outline-none"
               />
             </label>
+          </div>
 
+          <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-y border-ivory/10 py-3">
             <div className="flex flex-wrap items-center gap-2">
               {CATEGORIES.map((item) => (
                 <button
@@ -91,35 +100,31 @@ function Media() {
                   type="button"
                   onClick={() => setCategory(item.id)}
                   aria-pressed={category === item.id}
-                  className={`border px-3 py-1.5 text-[0.62rem] tracking-[0.14em] transition-colors ${
+                  className={`border px-3 py-1.5 text-[0.6rem] tracking-[0.12em] transition-colors ${
                     category === item.id
                       ? "border-gold bg-gold text-ink-900"
-                      : "border-ivory/15 text-ivory/60 hover:border-gold/50 hover:text-ivory"
+                      : "border-ivory/15 text-ivory/55 hover:border-gold/50 hover:text-ivory"
                   }`}
                 >
                   {t(item.label)}
                 </button>
               ))}
             </div>
+            <p className="text-[0.6rem] tracking-wide text-ivory/32" aria-live="polite">
+              {t({
+                ar: `${results.length} من ${WORLDS.length} عوالم`,
+                en: `${results.length} of ${WORLDS.length} worlds`,
+              })}
+            </p>
           </div>
 
-          <p className="mt-5 text-[0.62rem] tracking-wide text-ivory/35" aria-live="polite">
-            {results.length === 1
-              ? t({ ar: "عالَم واحد", en: "1 world" })
-              : t({ ar: `${results.length} عوالم`, en: `${results.length} worlds` })}
-          </p>
-        </div>
-      </header>
-
-      <section className="px-5 py-14 sm:px-8">
-        <div className="mx-auto max-w-[1400px]">
           {results.length === 0 ? (
-            <div className="border border-ivory/10 bg-ink-800/60 px-6 py-16 text-center">
+            <div className="border-b border-ivory/10 px-2 py-16 text-center">
               <p className="font-display text-2xl text-ivory">{t({ ar: "لا نتائج مطابقة", en: "No matching worlds" })}</p>
-              <p className="mx-auto mt-3 max-w-md text-sm text-ivory/45">
+              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ivory/45">
                 {t({
-                  ar: "جرّب كلمة أوسع أو أعد الضبط. كل العوالم هنا مفاهيم حقيقية قيد التطوير، وليست حلقات منشورة.",
-                  en: "Try a broader word or reset. Every world here is a genuine concept in development, never a published episode.",
+                  ar: "جرّب كلمة أوسع أو أعد الضبط. كل العوالم هنا مفاهيم قيد التطوير، وليست حلقات منشورة.",
+                  en: "Try a broader word or reset. Every world here is a concept in development, never a published episode.",
                 })}
               </p>
               <button
@@ -128,37 +133,45 @@ function Media() {
                   setQuery("");
                   setCategory("all");
                 }}
-                className="mt-6 inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[0.65rem] tracking-[0.16em] text-gold"
+                className="mt-6 inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[0.62rem] tracking-[0.14em] text-gold"
               >
-                <RotateCcw className="h-3.5 w-3.5" />
+                <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
                 {t({ ar: "عرض كل العوالم", en: "Show all worlds" })}
               </button>
             </div>
           ) : (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ol className="mt-1">
               {results.map((world) => (
-                <Link
-                  key={world.id}
-                  to={world.href}
-                  className="group relative aspect-[4/3] overflow-hidden border border-gold/15 bg-ink-800 lift hover:border-gold/45"
-                >
-                  <Image src={world.image} alt="" fittingType="fill" className="absolute inset-0 h-full w-full transition-transform duration-[1300ms] group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/60 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="eyebrow text-gold/80">{t(world.kicker)}</p>
-                    <h2 className="mt-2 font-display text-2xl text-ivory">{t(world.title)}</h2>
-                    <p className="mt-2 text-sm leading-relaxed text-ivory/50">{t(world.teaser)}</p>
-                    <div className="mt-4 flex items-center justify-between border-t border-ivory/10 pt-3">
-                      <span className="text-[0.55rem] uppercase tracking-[0.16em] text-ivory/40">{t(STATUS_LABEL[world.status])}</span>
-                      <ArrowUpRight className="h-4 w-4 text-gold transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </div>
-                  </div>
-                </Link>
+                <li key={world.id}>
+                  <Link
+                    to={world.href}
+                    className="group grid grid-cols-[2.2rem_1fr_auto] items-start gap-4 border-b border-ivory/10 py-5 transition-colors hover:bg-gold/[0.035] sm:grid-cols-[3rem_1.15fr_1fr_auto] sm:items-center sm:gap-6 sm:py-6"
+                  >
+                    <span className="pt-1 font-display text-lg leading-none text-gold/55 sm:text-xl">
+                      {String(WORLDS.findIndex((entry) => entry.id === world.id) + 1).padStart(2, "0")}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="eyebrow block text-gold/75">{t(world.kicker)}</span>
+                      <span className="mt-1.5 block font-display text-xl leading-tight text-ivory transition-colors group-hover:text-gold-light sm:text-2xl">
+                        {t(world.title)}
+                      </span>
+                    </span>
+                    <span className="hidden max-w-md text-sm leading-relaxed text-ivory/45 sm:block">
+                      {t(world.teaser)}
+                    </span>
+                    <span className="flex items-center gap-3 self-center">
+                      <span className="hidden whitespace-nowrap text-[0.55rem] uppercase tracking-[0.16em] text-ivory/32 md:inline">
+                        {t(STATUS_LABEL[world.status])}
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-gold transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+                    </span>
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ol>
           )}
 
-          <p className="mt-10 max-w-2xl text-xs leading-relaxed text-ivory/35">
+          <p className="mt-8 max-w-2xl text-xs leading-relaxed text-ivory/32">
             {t({
               ar: "الصور في هذه العوالم توضيحية للهوية البصرية. المنصة تصور قيد التطوير: لا حلقات منشورة، ولا بثّ حيّ، ولا استشارات قانونية.",
               en: "Imagery across these worlds is illustrative brand art. The platform is a concept in development: no published episodes, no live broadcast, no legal advice.",

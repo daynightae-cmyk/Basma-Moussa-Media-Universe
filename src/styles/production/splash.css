@@ -1,0 +1,258 @@
+/* ==========================================================================
+   The signature opening — one golden thread, one identity.
+   ========================================================================== */
+
+/* The inline head script marks a returning visitor before paint. */
+html[data-intro-seen="1"] .splash {
+  display: none !important;
+}
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #03050c;
+  color: var(--ivory);
+  padding: clamp(1rem, 4vw, 2rem);
+  isolation: isolate;
+}
+
+.splash__ambient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(52% 42% at 50% 42%, rgba(215, 171, 98, 0.13), transparent 70%),
+    radial-gradient(70% 55% at 50% 108%, rgba(25, 39, 68, 0.75), transparent 70%),
+    radial-gradient(40% 36% at 82% 12%, rgba(215, 171, 98, 0.06), transparent 70%);
+}
+
+.splash__ambient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(251, 247, 239, 0.18) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+}
+
+.splash__curtain {
+  position: absolute;
+  inset-inline: 0;
+  height: 24vh;
+  pointer-events: none;
+}
+.splash__curtain--top {
+  top: 0;
+  background: linear-gradient(180deg, #02040a 0%, rgba(2, 4, 10, 0.6) 45%, transparent 100%);
+}
+.splash__curtain--bottom {
+  bottom: 0;
+  background: linear-gradient(0deg, #02040a 0%, rgba(2, 4, 10, 0.7) 45%, transparent 100%);
+}
+
+.splash__canvas {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.splash__svg {
+  width: min(86vw, 660px);
+  height: auto;
+  max-height: 74vh;
+  filter: drop-shadow(0 0 26px rgba(215, 171, 98, 0.22));
+}
+
+.splash__brand {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: clamp(0rem, 2vh, 1rem);
+}
+
+.splash__logo-wrap {
+  position: relative;
+  width: clamp(180px, 23vw, 286px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.splash__halo {
+  position: absolute;
+  inset: -22%;
+  border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(242, 215, 160, 0.28), rgba(215, 171, 98, 0.07) 55%, transparent 72%);
+  filter: blur(4px);
+  animation: splash-halo 6s ease-in-out infinite;
+}
+
+@keyframes splash-halo {
+  0%, 100% { opacity: 0.65; transform: scale(0.97); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+.splash__logo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 40px rgba(215, 171, 98, 0.28)) contrast(1.04);
+}
+
+.splash__wordmark {
+  margin-top: clamp(0.4rem, 1.6vh, 1.2rem);
+}
+
+.splash__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.4vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: #fbf3e3;
+}
+
+.splash__rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.65rem auto 0;
+  width: 9rem;
+}
+.splash__rule span {
+  display: block;
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(215, 171, 98, 0.8));
+}
+.splash__rule span:last-child {
+  background: linear-gradient(90deg, rgba(215, 171, 98, 0.8), transparent);
+}
+.splash__rule span:nth-child(2) {
+  flex: 0 0 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f2d7a0;
+  box-shadow: 0 0 10px rgba(242, 215, 160, 0.8);
+}
+
+.splash__sub {
+  margin: 0.6rem 0 0;
+  font-size: clamp(0.6rem, 1.2vw, 0.72rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(242, 215, 160, 0.72);
+}
+
+.splash__invitation {
+  margin-top: clamp(1.4rem, 3.4vh, 2.4rem);
+}
+
+.splash__enter {
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+  min-width: min(76vw, 17rem);
+  padding: 1rem 2.1rem 0.95rem;
+  border: 1px solid rgba(215, 171, 98, 0.62);
+  background: linear-gradient(160deg, rgba(215, 171, 98, 0.14), rgba(215, 171, 98, 0.03));
+  color: #f8e6be;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.5s ease, background 0.5s ease, color 0.5s ease, transform 0.5s var(--ease-cine, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.splash__enter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 244, 216, 0.28) 48%, transparent 72%);
+  transform: translateX(-120%);
+  transition: transform 0.9s ease;
+}
+.splash__enter:hover,
+.splash__enter:focus-visible {
+  background: #d7ab62;
+  border-color: #f2d7a0;
+  color: #0a0e1a;
+  transform: translateY(-2px);
+}
+.splash__enter:hover::before,
+.splash__enter:focus-visible::before {
+  transform: translateX(120%);
+}
+.splash__enter-ar {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.1vw, 1.3rem);
+  line-height: 1.3;
+}
+.splash__enter-en {
+  font-family: var(--font-heading);
+  font-size: 0.56rem;
+  letter-spacing: 0.28em;
+  opacity: 0.75;
+}
+
+.splash__skip {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(1.4rem, 4vh, 2.4rem);
+  inset-inline-start: clamp(1.2rem, 4vw, 2.6rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0;
+  border: 0;
+  background: none;
+  color: rgba(251, 247, 239, 0.52);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+.splash__skip:hover {
+  color: #f2d7a0;
+}
+html[dir="rtl"] .splash__skip {
+  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+}
+
+.splash__note {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(1.5rem, 4.2vh, 2.6rem);
+  inset-inline-end: clamp(1.2rem, 4vw, 2.6rem);
+  margin: 0;
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  color: rgba(251, 247, 239, 0.28);
+  text-transform: uppercase;
+}
+
+@media (max-height: 720px) {
+  .splash__logo-wrap { width: clamp(140px, 19vw, 210px); }
+  .splash__name { font-size: 1.65rem; }
+  .splash__rule { margin-top: 0.4rem; }
+  .splash__sub { margin-top: 0.4rem; }
+  .splash__invitation { margin-top: 1rem; }
+  .splash__enter { padding: 0.8rem 1.8rem; }
+}
+
+@media (max-width: 520px) {
+  .splash__note { display: none; }
+  .splash__logo-wrap { width: min(52vw, 210px); }
+  .splash__svg { width: 94vw; max-height: 56vh; }
+}

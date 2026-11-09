@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_site/atelier")({
 function AtelierPage() {
   const { lang } = useI18n();
   return (
-    <div className="min-h-screen bg-ink-900 pt-24">
+    <div className="min-h-screen bg-ink-900">
       <StoryAtelier dict={getDictionary(lang)} locale={lang} />
       <p className="mx-auto max-w-[1300px] px-5 pb-12 text-sm text-ivory/65">
         {lang === "ar" ? "الصور والمشاهد هنا تصورية فقط. تُحفظ مسوداتك على جهازك، ولا تنشر تلقائيًا." : "Scenes are concepts. Drafts are saved on this device and are never published automatically."}
