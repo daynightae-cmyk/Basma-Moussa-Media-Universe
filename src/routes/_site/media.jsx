@@ -93,14 +93,14 @@ function Media() {
           </div>
 
           <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-y border-ivory/10 py-3">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="no-scrollbar -mx-1 flex items-center gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
               {CATEGORIES.map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => setCategory(item.id)}
                   aria-pressed={category === item.id}
-                  className={`border px-3 py-1.5 text-[0.6rem] tracking-[0.12em] transition-colors ${
+                  className={`shrink-0 border px-3 py-1.5 text-[0.6rem] tracking-[0.12em] transition-colors ${
                     category === item.id
                       ? "border-gold bg-gold text-ink-900"
                       : "border-ivory/15 text-ivory/55 hover:border-gold/50 hover:text-ivory"

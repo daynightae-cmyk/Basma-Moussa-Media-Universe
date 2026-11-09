@@ -7,6 +7,13 @@ html[data-intro-seen="1"] .splash {
   display: none !important;
 }
 
+/* The intro owns the document scroll while it is open. The site header
+   rewrites body overflow on mount, so the lock lives on <html>. */
+html.bm-splash-open,
+html.bm-splash-open body {
+  overflow: hidden !important;
+}
+
 .splash {
   position: fixed;
   inset: 0;

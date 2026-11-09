@@ -86,28 +86,37 @@ function TheatreMask({ animate: shouldAnimate }) {
         fill="url(#splash-mask-fill)"
         stroke="none"
         initial={{ opacity: 0, scale: 0.94 }}
-        animate={{ opacity: shouldAnimate ? 0.42 : 0.42, scale: 1 }}
+        animate={{ opacity: 0.55, scale: 1 }}
         transition={{ duration: 1.4, ease: EASE }}
         style={{ transformOrigin: "320px 300px" }}
       />
       {/* outer mask — drawn as one continuous thread */}
       <motion.path
         d="M320 76 C 424 76 492 160 492 254 C 492 336 454 404 386 444 C 358 461 338 476 320 508 C 302 476 282 461 254 444 C 186 404 148 336 148 254 C 148 160 216 76 320 76 Z"
-        {...(shouldAnimate ? drawIn(0, 2.1) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(0, 1.45) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         {...goldStroke}
         strokeWidth={2.2}
+      />
+      {/* inner rim — a second contour gives the mask thickness */}
+      <motion.path
+        d="M320 76 C 424 76 492 160 492 254 C 492 336 454 404 386 444 C 358 461 338 476 320 508 C 302 476 282 461 254 444 C 186 404 148 336 148 254 C 148 160 216 76 320 76 Z"
+        transform="translate(320 292) scale(0.925) translate(-320 -292)"
+        {...(shouldAnimate ? drawIn(0.18, 1.35) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...goldStroke}
+        strokeWidth={0.8}
+        strokeOpacity={0.4}
       />
       {/* expressive brow line */}
       <motion.path
         d="M214 208 C 250 168 300 164 330 190"
-        {...(shouldAnimate ? drawIn(0.55, 1.1) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(0.4, 0.85) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         {...goldStroke}
         strokeWidth={1.4}
         strokeOpacity={0.85}
       />
       <motion.path
         d="M426 208 C 390 168 340 164 310 190"
-        {...(shouldAnimate ? drawIn(0.65, 1.1) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(0.5, 0.85) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         {...goldStroke}
         strokeWidth={1.4}
         strokeOpacity={0.85}
@@ -115,7 +124,7 @@ function TheatreMask({ animate: shouldAnimate }) {
       {/* eye apertures */}
       <motion.path
         d="M224 250 C 244 222 286 224 296 254 C 282 276 240 278 224 250 Z"
-        {...(shouldAnimate ? drawIn(0.95, 0.8) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(0.7, 0.6) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         fill="rgba(242,215,160,0.08)"
         stroke="url(#splash-thread)"
         strokeWidth={1.3}
@@ -123,7 +132,7 @@ function TheatreMask({ animate: shouldAnimate }) {
       />
       <motion.path
         d="M416 250 C 396 222 354 224 344 254 C 358 276 400 278 416 250 Z"
-        {...(shouldAnimate ? drawIn(1.05, 0.8) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(0.78, 0.6) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         fill="rgba(242,215,160,0.08)"
         stroke="url(#splash-thread)"
         strokeWidth={1.3}
@@ -132,22 +141,37 @@ function TheatreMask({ animate: shouldAnimate }) {
       {/* mask ridge */}
       <motion.path
         d="M320 196 C 314 260 316 318 320 358"
-        {...(shouldAnimate ? drawIn(1.15, 0.9) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(0.82, 0.75) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         {...goldStroke}
         strokeWidth={0.9}
         strokeOpacity={0.45}
       />
+      {/* cheek contours */}
+      <motion.path
+        d="M236 304 C 242 344 268 374 300 390"
+        {...(shouldAnimate ? drawIn(0.95, 0.7) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...goldStroke}
+        strokeWidth={0.7}
+        strokeOpacity={0.26}
+      />
+      <motion.path
+        d="M404 304 C 398 344 372 374 340 390"
+        {...(shouldAnimate ? drawIn(1.0, 0.7) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...goldStroke}
+        strokeWidth={0.7}
+        strokeOpacity={0.26}
+      />
       {/* open theatrical mouth */}
       <motion.path
         d="M278 378 C 296 358 344 358 362 378 C 348 422 292 422 278 378 Z"
-        {...(shouldAnimate ? drawIn(1.25, 0.9) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(1.0, 0.7) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         fill="rgba(242,215,160,0.09)"
         stroke="url(#splash-thread)"
         strokeWidth={1.4}
       />
       <motion.path
         d="M286 388 C 305 401 335 401 354 388"
-        {...(shouldAnimate ? drawIn(1.55, 0.7) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(1.2, 0.55) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         {...goldStroke}
         strokeWidth={0.9}
         strokeOpacity={0.5}
@@ -155,14 +179,14 @@ function TheatreMask({ animate: shouldAnimate }) {
       {/* ribbons of the mask */}
       <motion.path
         d="M188 300 C 150 330 140 380 166 420"
-        {...(shouldAnimate ? drawIn(1.4, 1) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(1.1, 0.75) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         {...goldStroke}
         strokeWidth={1.1}
         strokeOpacity={0.6}
       />
       <motion.path
         d="M452 300 C 490 330 500 380 474 420"
-        {...(shouldAnimate ? drawIn(1.5, 1) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
+        {...(shouldAnimate ? drawIn(1.2, 0.75) : { initial: false, animate: { pathLength: 1, opacity: 1 } })}
         {...goldStroke}
         strokeWidth={1.1}
         strokeOpacity={0.6}
@@ -240,7 +264,9 @@ export default function GoldenThreadSplash({ onDone }) {
 
   useEffect(() => {
     if (!open) return undefined;
-    document.body.style.overflow = "hidden";
+    // Lock the document itself, not just <body>: the site header also writes
+    // body.style.overflow on mount, which used to release the intro's lock.
+    document.documentElement.classList.add("bm-splash-open");
     const onKey = (event) => {
       if (event.key === "Escape") {
         event.preventDefault();
@@ -250,12 +276,12 @@ export default function GoldenThreadSplash({ onDone }) {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("bm-splash-open");
     };
   }, [open]);
 
   useEffect(() => {
-    if (open && stage >= 4) {
+    if (open && stage >= 5) {
       const id = window.setTimeout(() => enterRef.current?.focus({ preventScroll: true }), 320);
       return () => window.clearTimeout(id);
     }
@@ -472,6 +498,7 @@ export default function GoldenThreadSplash({ onDone }) {
 
             <motion.div
               className="splash__wordmark"
+              initial={false}
               animate={{ opacity: stage >= 4 ? 1 : 0, y: stage >= 4 ? 0 : 14 }}
               transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
             >
@@ -486,10 +513,19 @@ export default function GoldenThreadSplash({ onDone }) {
 
             <motion.div
               className="splash__invitation"
+              initial={false}
               animate={{ opacity: stage >= 5 ? 1 : 0, y: stage >= 5 ? 0 : 18 }}
               transition={{ duration: 0.8, ease: EASE }}
+              aria-hidden={stage < 5}
+              style={{ pointerEvents: stage >= 5 ? "auto" : "none" }}
             >
-              <button ref={enterRef} type="button" className="splash__enter" onClick={enter}>
+              <button
+                ref={enterRef}
+                type="button"
+                className="splash__enter"
+                onClick={enter}
+                tabIndex={stage >= 5 ? 0 : -1}
+              >
                 <span className="splash__enter-ar" lang="ar" dir="rtl">
                   ادخل عالم بسمة
                 </span>

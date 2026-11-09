@@ -15,12 +15,14 @@ export default function AssistantDock() {
 
   if (pathname === "/ai-studio") return null;
 
+  // On phones the dock sits over production controls and editorial cards.
+  // The header menu still carries the Basma AI entrance at every size.
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 end-5 z-[80] flex items-center gap-2 border border-gold/40 bg-ink-900/90 px-4 py-3 text-[0.65rem] uppercase tracking-[0.18em] text-gold backdrop-blur-md transition-colors hover:bg-gold hover:text-ink-900"
+        className="fixed bottom-6 end-5 z-[80] hidden items-center gap-2 border border-gold/40 bg-ink-900/90 px-4 py-3 text-[0.65rem] uppercase tracking-[0.18em] text-gold backdrop-blur-md transition-colors hover:bg-gold hover:text-ink-900 md:flex"
         aria-label={t({ ar: "افتح بسمة AI", en: "Open Basma AI" })}
       >
         <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />

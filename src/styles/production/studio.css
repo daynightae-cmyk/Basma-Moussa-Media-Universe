@@ -1435,8 +1435,10 @@ html[lang="ar"] .on-air__label {
     z-index: 3;
   }
   .studio-stage {
+    /* A taller phone frame keeps the two chairs, the complete table and the
+       set floor in view; 16:9 cropped the set to a strip. */
     aspect-ratio: 4 / 3;
-    max-height: 48vh;
+    max-height: 60vh;
     border-radius: 14px;
   }
   .studio-stage__viewport {

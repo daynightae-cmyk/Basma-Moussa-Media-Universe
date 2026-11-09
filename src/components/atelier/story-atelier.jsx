@@ -266,6 +266,13 @@ function StoryAtelier({ dict, locale }) {
                 style={{ backgroundImage: `linear-gradient(155deg, ${mood.from}, ${mood.to})` }}
               >
                 <div className="atelier-monitor__grain" aria-hidden="true" />
+                {!monitorFrame && (
+                  <div className="atelier-monitor__slate" aria-hidden="true">
+                    <span>SLATE 00</span>
+                    <span>SCENE —</span>
+                    <span dir="ltr">00:00:00</span>
+                  </div>
+                )}
                 <span className="atelier-monitor__scene" aria-hidden="true">
                   {monitorFrame ? String(monitorIndex + 1).padStart(2, "0") : null}
                 </span>
@@ -419,6 +426,13 @@ function StoryAtelier({ dict, locale }) {
                 })}
                 {cards.length === 0 && (
                   <li className="filmstrip__empty">
+                    <div className="filmstrip__ghosts" aria-hidden="true">
+                      {[1, 2, 3, 4].map((slot) => (
+                        <span key={slot} className="filmstrip__ghost">
+                          {String(slot).padStart(2, "0")}
+                        </span>
+                      ))}
+                    </div>
                     <span aria-hidden="true">—</span>
                     <p>{dict.atelier.emptyHint}</p>
                   </li>

@@ -133,7 +133,7 @@ export default function AudioPlayer({ src, title, note, disclosure }) {
             el.currentTime = Number(event.target.value);
             setTime(Number(event.target.value));
           }}
-          className="flex-1 accent-gold"
+          className="min-w-0 flex-1 accent-gold"
           aria-label={t({ ar: "موضع التشغيل", en: "Seek" })}
         />
 
