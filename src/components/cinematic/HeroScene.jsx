@@ -79,7 +79,7 @@ export default function HeroScene({ scene }) {
             >
               <div className="absolute -inset-3 border border-gold/25 arch" aria-hidden="true" />
               <div className="relative overflow-hidden arch">
-                <Image src={scene.foreground || scene.image} alt={t({ ar: "بورتريه تحريري توضيحي", en: "Illustrative editorial portrait" })} fittingType="fill" className="aspect-[3/4] w-full" />
+                <Image src={scene.foreground || scene.image} alt={t({ ar: "فن تجريدي مؤقت بدون صورة شخصية", en: "Temporary abstract concept art, not a portrait" })} fittingType="fill" className="aspect-[3/4] w-full" />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900/70 via-transparent to-transparent" />
               </div>
             </motion.div>
