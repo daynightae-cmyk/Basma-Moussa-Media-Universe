@@ -1,0 +1,110 @@
+{
+  "name": "StorySubmission",
+  "type": "object",
+  "properties": {
+    "submitter_name": {
+      "type": "string",
+      "description": "Name the person chose to share"
+    },
+    "contact": {
+      "type": "string",
+      "description": "Optional phone or email for follow-up"
+    },
+    "city": {
+      "type": "string",
+      "enum": [
+        "sharjah",
+        "dubai",
+        "abu_dhabi",
+        "ajman",
+        "uaq",
+        "rak",
+        "fujairah",
+        "outside_uae"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "pink",
+        "green",
+        "yellow",
+        "gray",
+        "red",
+        "gray"
+      ]
+    },
+    "media_type": {
+      "type": "string",
+      "enum": [
+        "video",
+        "audio",
+        "photos",
+        "text"
+      ],
+      "enumColors": [
+        "purple",
+        "blue",
+        "green",
+        "gray"
+      ]
+    },
+    "story": {
+      "type": "string",
+      "description": "The story itself, in the submitter's own words"
+    },
+    "consent": {
+      "type": "boolean",
+      "description": "Submitter confirmed the story is theirs and may be reviewed"
+    },
+    "media_uri": {
+      "type": "string",
+      "description": "Private storage URI of an uploaded file"
+    },
+    "media_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "declined"
+      ],
+      "enumColors": [
+        "yellow",
+        "green",
+        "red"
+      ],
+      "default": "pending"
+    },
+    "review_note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "story",
+    "consent"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "user"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
